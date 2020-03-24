@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'dart:core';
-import 'dart:math';
+import 'package:custom_switch/custom_switch.dart';
 
 void main() => runApp(MyApp());
 
@@ -79,7 +79,7 @@ class _KinBurnState extends State<KinBurn> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Text('Age', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _textColor)),
+                              Text('Age', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: _textColor)),
                               SizedBox(
                                 height: 20,
                               ),
@@ -134,7 +134,7 @@ class _KinBurnState extends State<KinBurn> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Text('Weight', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _textColor)),
+                              Text('Weight', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: _textColor)),
                               SizedBox(
                                 height: 20,
                               ),
@@ -193,7 +193,7 @@ class _KinBurnState extends State<KinBurn> {
                       SizedBox(
                         height: 20,
                       ),
-                      Text('Height', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: _textColor)),
+                      Text('Height', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: _textColor)),
                       SizedBox(
                         height: 3,
                       ),
@@ -252,6 +252,77 @@ class _KinBurnState extends State<KinBurn> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(_radius),
+              child: SizedBox(
+                width:  375,
+                height: 120,
+                child: Container(
+                  color: _whiteColor,
+                  padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text('Gender', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: _textColor)),
+                      Row(
+                        children: <Widget>[
+                          Text('i\'m', style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold, color: _textColor)),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            children: <Widget>[
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Text('Female', style: TextStyle(fontSize: 17, color: _textColor))
+                            ],
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          SizedBox(
+                            width: 80,
+                            child: Column(
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                CustomSwitch(
+                                  activeColor: _primaryColor,
+                                  value: false,
+                                  onChanged: (value) {
+                                    setState(() {
+//                                  status = value;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            children: <Widget>[
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Text('Male', style: TextStyle(fontSize: 17, color: _textColor))
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       )
