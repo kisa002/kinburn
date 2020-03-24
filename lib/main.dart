@@ -42,7 +42,7 @@ class _KinBurnState extends State<KinBurn> {
   int _age = 20;
   int _weight = 50;
 
-  int _height = 170;
+  int _height = 169;
 
   bool _isInit = false;
 
@@ -212,12 +212,10 @@ class _KinBurnState extends State<KinBurn> {
                             viewportFraction: _height <= 100 ? 0.2 : 0.3,
 //                            scale: -1,
                             onIndexChanged: (int index) {
-                              if(_isInit) {
+                              setState(() {
+                                // TODO 나중에 결과 값에 +1 해줘야함
                                 _height = index;
-                              } else {
-                                _height = index;
-                                _isInit = true;
-                              }
+                              });
                             },
                             itemBuilder: (BuildContext context, int index){
                               double fontSize = index <= 100 ? 20 : 10;
@@ -248,6 +246,7 @@ class _KinBurnState extends State<KinBurn> {
                           ),
                         ),
                       ),
+                      Text('$_height')
                     ],
                   ),
                 ),
