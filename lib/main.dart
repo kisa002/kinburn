@@ -233,7 +233,7 @@ class _KinBurnState extends State<KinBurn> {
                                   Color color = _textSwiperThirdColor;
                                   int x = (_height - index).abs();
 
-                                  print('index: $index');
+//                                  print('index: $index');
 
                                   if(x == 0) {
                                     fontSize += 35;
@@ -412,7 +412,7 @@ class _KinBurnState extends State<KinBurn> {
                                 ],
                               )
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -433,7 +433,9 @@ class _KinBurnState extends State<KinBurn> {
                       child: Text('BMI Calculate', style: TextStyle(fontSize: 18, color: Colors.white)),
                     ),
                   ),
-                )
+                ),
+                SizedBox(height: 25),
+                Text('Designed by Dmitry Mashkin', style: TextStyle(fontSize: 12, color: Color(0xff777777), fontWeight: FontWeight.w300))
               ],
             ),
           ),
