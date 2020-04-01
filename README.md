@@ -1,6 +1,6 @@
 # kinburn
 
-A new Flutter application.
+'처음 배우는 플러터' 도서로 공부하여 처음 만들어본 플러터 애플리케이션 입니다.
 
 ## Getting Started
 
