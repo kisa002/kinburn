@@ -209,7 +209,7 @@ class _KinBurnState extends State<KinBurn> {
                           child: Swiper(
                             index: _height,
                             itemCount: 180,
-                            viewportFraction: _height <= 100 ? 0.2 : 0.3,
+                            viewportFraction: _height <= 100 ? 0.2 : 0.2,
 //                            scale: -1,
                             onIndexChanged: (int index) {
                               setState(() {
@@ -218,7 +218,7 @@ class _KinBurnState extends State<KinBurn> {
                               });
                             },
                             itemBuilder: (BuildContext context, int index){
-                              double fontSize = index <= 100 ? 20 : 10;
+                              double fontSize = index <= 100 ? 20 : 8;
 
                               Color color = _textSwiperThirdColor;
                               int x = (_height - index).abs();
@@ -230,11 +230,16 @@ class _KinBurnState extends State<KinBurn> {
                                 color = _textColor;
                               }
                               else if(x == 1) {
-                                fontSize += 10;
+                                if(index > 100)
+                                  fontSize += 18;
+                                else
+                                  fontSize += 10;
+
                                 color = _textSwiperSecondColor;
                               }
                               else if(x == 2) {
-//                                fontSize = 20;
+                                if(index > 100)
+                                  fontSize += 10;
                                 color = _textSwiperThirdColor;
                               }
 
@@ -246,7 +251,57 @@ class _KinBurnState extends State<KinBurn> {
                           ),
                         ),
                       ),
-                      Text('$_height')
+//                      Text('$_height'),
+                      SizedBox(
+                        height: 10
+                      ),
+                      SizedBox(
+                        width: 10,
+                        height: 7,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(100),
+                              topRight: Radius.circular(100)
+                          ),
+                          child: Container(
+                            color: _primaryColor,
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors: [Colors.white, Color(0xffECECEC)]
+                              ),
+                            ),
+                            child: SizedBox(
+                              width: 150,
+                              height: 2,
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors: [Color(0xffECECEC), Colors.white]
+                              ),
+                            ),
+                            child: SizedBox(
+                              width: 150,
+                              height: 2,
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        width: 300,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: _createRuler()
+                        )
+                      )
                     ],
                   ),
                 ),
@@ -360,6 +415,34 @@ class _KinBurnState extends State<KinBurn> {
 
   void swipeWeight(int weight) {
     print('weight: $weight');
+  }
+
+  List<Widget> _createRuler() {
+    List<Widget> list = new List<Widget>();
+
+    for(int i=1; i<50; i++) {
+      // 0xffececec
+      // 0xff25aaff
+      if(i % 5 == 0) {
+        list.add(new SizedBox(
+          width: 2,
+          height: 13,
+          child: Container(
+            color: Color(0xffececec),
+          ),
+        ));
+      } else {
+        list.add(new SizedBox(
+          width: 1,
+          height: 13,
+          child: Container(
+            color: Color(0xffececec),
+          ),
+        ));
+      }
+    }
+
+    return list;
   }
 }
 
