@@ -26,6 +26,9 @@ class KinBurn extends StatefulWidget {
 }
 
 class _KinBurnState extends State<KinBurn> {
+  final int GENDER_MALE = 1;
+  final int GENDER_FEMALE = 2;
+
   final _appbarColor = const Color(0xff353641);
 
   final _textColor = const Color(0xff565869);
@@ -38,6 +41,8 @@ class _KinBurnState extends State<KinBurn> {
   final _primaryColor = const Color(0xff576EE7);
 
   final double _radius = 20;
+
+  int _gender = 1;
 
   int _age = 20;
   int _weight = 50;
@@ -376,6 +381,45 @@ class _KinBurnState extends State<KinBurn> {
                     ],
                   ),
                 ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            FlatButton(
+              onPressed: () => {
+                setState(() => {
+                  _gender = _gender == GENDER_FEMALE ? GENDER_MALE : GENDER_FEMALE
+//                  _gender += 10
+                })
+              },
+              child: Text('$_gender'),
+            ),
+            SizedBox(
+              width: 80,
+              height: 35,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Container(
+                  alignment: Alignment.center,
+                  color: Color(0xff25aaff),
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(_gender == GENDER_FEMALE ? 40 : 0, 0, _gender == GENDER_MALE ? 40 : 0, 0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: SizedBox(
+                        width: 28,
+                        height: 28,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
               ),
             )
           ],
