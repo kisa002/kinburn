@@ -50,6 +50,10 @@ class _KinBurnState extends State<KinBurn> {
   int _height = 169;
 
   bool _isInit = false;
+  bool _isShowResult = false;
+
+  double _bmi = 0;
+  String _bmiRange = 'Normal';
 
   @override
   Widget build(BuildContext context) {
@@ -62,22 +66,23 @@ class _KinBurnState extends State<KinBurn> {
         elevation: 0,
         backgroundColor: _whiteColor,
       ),
-      body: Container(
-        color: _backgroundColor,
-        padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-        child: Column(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body: Stack(
+        children: <Widget>[
+          Container(
+            color: _backgroundColor,
+            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+            child: Column(
               children: <Widget>[
-                SizedBox(
-                    width: 350/2,
-                    height: 400/2,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(_radius),
-                      child: Container(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 350/2,
+                      height: 400/2,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(_radius),
+                        child: Container(
                           color: _whiteColor,
-//                          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
@@ -118,316 +123,369 @@ class _KinBurnState extends State<KinBurn> {
                                         elevation: 2,
                                         child: Icon(Icons.add, color: _primaryColor),
                                       )
-                                  )
-                                ],
-                              ),
-                            ],
-                          )
-                      ),
-                    )
+                                    )
+                                  ],
+                                ),
+                              ],
+                            )
+                          ),
+                        )
+                    ),
+                    SizedBox(
+                      width: 350/2,
+                      height: 400/2,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(_radius),
+                        child: Container(
+                            color: _whiteColor,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text('Weight', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: _textColor)),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text('$_weight', style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold, color: _textColor)),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    ButtonTheme(
+                                        minWidth: 35,
+                                        height: 35,
+                                        child: MaterialButton(
+                                          color: _whiteColor,
+                                          onPressed: () => _decreaseWeight(),
+                                          shape: CircleBorder(),
+                                          padding: EdgeInsets.all(0),
+                                          elevation: 2,
+                                          child: Icon(Icons.remove, color: _primaryColor),
+                                        )
+                                    ),
+                                    ButtonTheme(
+                                        minWidth: 35,
+                                        height: 35,
+                                        child: MaterialButton(
+                                          color: _whiteColor,
+                                          onPressed: () => _increaseWeight(),
+                                          shape: CircleBorder(),
+                                          padding: EdgeInsets.all(0),
+                                          elevation: 2,
+                                          child: Icon(Icons.add, color: _primaryColor),
+                                        )
+                                    )
+                                  ],
+                                ),
+                              ],
+                            )
+                        ),
+                      )
+                    ),
+                  ],
                 ),
                 SizedBox(
-                    width: 350/2,
-                    height: 400/2,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(_radius),
-                      child: Container(
-                          color: _whiteColor,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text('Weight', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: _textColor)),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text('$_weight', style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold, color: _textColor)),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  ButtonTheme(
-                                      minWidth: 35,
-                                      height: 35,
-                                      child: MaterialButton(
-                                        color: _whiteColor,
-                                        onPressed: () => _decreaseWeight(),
-                                        shape: CircleBorder(),
-                                        padding: EdgeInsets.all(0),
-                                        elevation: 2,
-                                        child: Icon(Icons.remove, color: _primaryColor),
-                                      )
-                                  ),
-                                  ButtonTheme(
-                                      minWidth: 35,
-                                      height: 35,
-                                      child: MaterialButton(
-                                        color: _whiteColor,
-                                        onPressed: () => _increaseWeight(),
-                                        shape: CircleBorder(),
-                                        padding: EdgeInsets.all(0),
-                                        elevation: 2,
-                                        child: Icon(Icons.add, color: _primaryColor),
-                                      )
-                                  )
-                                ],
-                              ),
-                            ],
-                          )
-                      ),
-                    )
+                  height: 25,
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            SizedBox(
-              width:  375,
-              height: 200,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(_radius),
-                child: Container(
-                  color: _whiteColor,
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text('Height', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: _textColor)),
-                      SizedBox(
-                        height: 3,
-                      ),
-                      Text('cm', style: TextStyle(fontSize: 15, color: _textGrayColor)),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 50,
-                        child: Container(
-                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: Swiper(
-                            index: _height,
-                            itemCount: 180,
-                            viewportFraction: _height <= 100 ? 0.2 : 0.2,
-//                            scale: -1,
-                            onIndexChanged: (int index) {
-                              setState(() {
-                                // TODO 나중에 결과 값에 +1 해줘야함
-                                _height = index;
-                              });
-                            },
-                            itemBuilder: (BuildContext context, int index){
-                              double fontSize = index <= 100 ? 20 : 8;
-
-                              Color color = _textSwiperThirdColor;
-                              int x = (_height - index).abs();
-
-                              print('index: $index');
-
-                              if(x == 0) {
-                                fontSize += 35;
-                                color = _textColor;
-                              }
-                              else if(x == 1) {
-                                if(index > 100)
-                                  fontSize += 18;
-                                else
-                                  fontSize += 10;
-
-                                color = _textSwiperSecondColor;
-                              }
-                              else if(x == 2) {
-                                if(index > 100)
-                                  fontSize += 10;
-                                color = _textSwiperThirdColor;
-                              }
-
-                              return Container(
-                                alignment: Alignment.center,
-                                child: Text('${index + 1}', style: TextStyle(fontSize: fontSize, color: color))
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-//                      Text('$_height'),
-                      SizedBox(
-                        height: 10
-                      ),
-                      SizedBox(
-                        width: 10,
-                        height: 7,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(100),
-                              topRight: Radius.circular(100)
-                          ),
-                          child: Container(
-                            color: _primaryColor,
-                          ),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                SizedBox(
+                  width:  375,
+                  height: 200,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(_radius),
+                    child: Container(
+                      color: _whiteColor,
+                      child: Column(
                         children: <Widget>[
-                          Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  colors: [Colors.white, Color(0xffECECEC)]
-                              ),
-                            ),
-                            child: SizedBox(
-                              width: 150,
-                              height: 2,
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  colors: [Color(0xffECECEC), Colors.white]
-                              ),
-                            ),
-                            child: SizedBox(
-                              width: 150,
-                              height: 2,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        width: 300,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: _createRuler()
-                        )
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(_radius),
-              child: SizedBox(
-                width:  375,
-                height: 120,
-                child: Container(
-                  color: _whiteColor,
-                  padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text('Gender', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: _textColor)),
-                      Row(
-                        children: <Widget>[
-                          Text('i\'m', style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold, color: _textColor)),
                           SizedBox(
-                            width: 20,
+                            height: 20,
                           ),
-                          Column(
-                            children: <Widget>[
-                              SizedBox(
-                                height: 25,
+                          Text('Height', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: _textColor)),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Text('cm', style: TextStyle(fontSize: 15, color: _textGrayColor)),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                              child: Swiper(
+                                index: _height,
+                                itemCount: 220,
+                                viewportFraction: _height <= 100 ? 0.2 : 0.2,
+  //                            scale: -1,
+                                onIndexChanged: (int index) {
+                                  setState(() {
+                                    // TODO 나중에 결과 값에 +1 해줘야함
+                                    _height = index;
+                                  });
+                                },
+                                itemBuilder: (BuildContext context, int index){
+                                  double fontSize = index <= 100 ? 20 : 8;
+
+                                  Color color = _textSwiperThirdColor;
+                                  int x = (_height - index).abs();
+
+                                  print('index: $index');
+
+                                  if(x == 0) {
+                                    fontSize += 35;
+                                    color = _textColor;
+                                  }
+                                  else if(x == 1) {
+                                    if(index > 100)
+                                      fontSize += 18;
+                                    else
+                                      fontSize += 10;
+
+                                    color = _textSwiperSecondColor;
+                                  }
+                                  else if(x == 2) {
+                                    if(index > 100)
+                                      fontSize += 10;
+                                    color = _textSwiperThirdColor;
+                                  }
+
+                                  return Container(
+                                    alignment: Alignment.center,
+                                    child: Text('${index + 1}', style: TextStyle(fontSize: fontSize, color: color))
+                                  );
+                                },
                               ),
-                              Text('Female', style: TextStyle(fontSize: 17, color: _textColor))
-                            ],
+                            ),
+                          ),
+  //                      Text('$_height'),
+                          SizedBox(
+                            height: 10
                           ),
                           SizedBox(
                             width: 10,
+                            height: 7,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(100),
+                                  topRight: Radius.circular(100)
+                              ),
+                              child: Container(
+                                color: _primaryColor,
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: [Colors.white, Color(0xffECECEC)]
+                                  ),
+                                ),
+                                child: SizedBox(
+                                  width: 150,
+                                  height: 2,
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: [Color(0xffECECEC), Colors.white]
+                                  ),
+                                ),
+                                child: SizedBox(
+                                  width: 150,
+                                  height: 2,
+                                ),
+                              )
+                            ],
                           ),
                           SizedBox(
-                            width: 85,
-                            height: 35,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: MaterialButton(
-                                onPressed: () => {
-                                  setState(() => {
-                                    _gender = _gender == GENDER_FEMALE ? GENDER_MALE : GENDER_FEMALE
-                                  })
-                                },
-                                padding: EdgeInsets.all(0),
-                                child: SizedBox(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      color: Color(_gender == GENDER_FEMALE ? 0xffFFA7A7 : 0xffA7B1FF),
-                                      child: AnimatedContainer(
-                                          duration: Duration(seconds: 12),
-                                          curve: Curves.fastOutSlowIn,
-                                          child: Container(
-                                            margin: EdgeInsets.fromLTRB(_gender == GENDER_MALE ? 40 : 0, 0, _gender == GENDER_FEMALE ? 40 : 0, 0),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: SizedBox(
-                                                width: 28,
-                                                height: 28,
+                            width: 300,
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: _createRuler()
+                            )
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(_radius),
+                  child: SizedBox(
+                    width:  375,
+                    height: 120,
+                    child: Container(
+                      color: _whiteColor,
+                      padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text('Gender', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: _textColor)),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text('i\'m', style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold, color: _textColor)),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 25,
+                                  ),
+                                  Text('Female', style: TextStyle(fontSize: 17, color: _textColor))
+                                ],
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              SizedBox(
+                                width: 85,
+                                height: 35,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: MaterialButton(
+                                    onPressed: () => {
+                                      setState(() => {
+                                        _gender = _gender == GENDER_FEMALE ? GENDER_MALE : GENDER_FEMALE
+                                      })
+                                    },
+                                    padding: EdgeInsets.all(0),
+                                    child: SizedBox(
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(100),
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          color: Color(_gender == GENDER_FEMALE ? 0xffFFA7A7 : 0xffA7B1FF),
+                                          child: AnimatedContainer(
+                                              duration: Duration(seconds: 12),
+                                              curve: Curves.fastOutSlowIn,
+                                              child: Container(
+                                                margin: EdgeInsets.fromLTRB(_gender == GENDER_MALE ? 40 : 0, 0, _gender == GENDER_FEMALE ? 40 : 0, 0),
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
-                                                    color: Color(_gender == GENDER_FEMALE ? 0xffFFE8E8 : 0xffE8F4FF),
+                                                  ),
+                                                  child: SizedBox(
+                                                    width: 28,
+                                                    height: 28,
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        color: Color(_gender == GENDER_FEMALE ? 0xffFFE8E8 : 0xffE8F4FF),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ),
-                                          )
+                                              )
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Column(
-                            children: <Widget>[
                               SizedBox(
-                                height: 25,
+                                width: 10,
                               ),
-                              Text('Male', style: TextStyle(fontSize: 17, color: _textColor))
+                              Column(
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 25,
+                                  ),
+                                  Text('Male', style: TextStyle(fontSize: 17, color: _textColor))
+                                ],
+                              )
                             ],
                           )
                         ],
-                      )
-                    ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            SizedBox(
-              width: 250,
-              height: 42,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(300),
-                child: MaterialButton(
-                  padding: EdgeInsets.all(0),
-                  onPressed: () => {},
-                  color: _primaryColor,
-                  child: Text('BMI Calculate', style: TextStyle(fontSize: 18, color: Colors.white)),
+                SizedBox(
+                  height: 40,
                 ),
-              ),
-            )
-          ],
-        ),
+                SizedBox(
+                  width: 250,
+                  height: 42,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(300),
+                    child: MaterialButton(
+                      padding: EdgeInsets.all(0),
+                      onPressed: () => showResultDialog(),
+                      color: _primaryColor,
+                      child: Text('BMI Calculate', style: TextStyle(fontSize: 18, color: Colors.white)),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          Visibility(
+            visible: _isShowResult,
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: Color(0x30000000),
+                ),
+                Dialog(
+                  backgroundColor: Colors.transparent,
+                  child: SizedBox(
+                    width: 320,
+                    height: 300,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        color: Colors.white,
+//                  padding: EdgeInsets.all(50),
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(height: 70),
+                            Text('$_bmi', style: TextStyle(fontSize: 70, fontWeight: FontWeight.bold, color: Color(0xff545667))),
+                            SizedBox(height: 10),
+                            Text('$_bmiRange', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff545667))),
+                            SizedBox(height: 50),
+                            SizedBox(
+                              width: 170,
+                              height: 35,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: MaterialButton(
+                                  onPressed: () => hideResultDialog(),
+                                  color: _primaryColor,
+                                  padding: EdgeInsets.all(0),
+                                  child: Text('OK', style: TextStyle(color: Colors.white)),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
+        ]
       )
     );
   }
@@ -491,6 +549,22 @@ class _KinBurnState extends State<KinBurn> {
     }
 
     return list;
+  }
+
+  void showResultDialog() {
+    setState(() {
+      _isShowResult = true;
+      _bmi = _weight / ((_height + 1) * 0.01 * (_height + 1) * 0.01);
+      _bmi = double.parse(_bmi.toStringAsFixed(2));
+
+      _bmiRange = _bmi <= 18.5 ? 'Underweight' : _bmi <= 23 ? 'Normal' : _bmi <= 25 ? 'Overweight' : _bmi <= 30 ? 'Obesity' : 'Pig';
+    });
+  }
+
+  void hideResultDialog() {
+    setState(() {
+      _isShowResult = false;
+    });
   }
 }
 
