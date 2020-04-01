@@ -347,22 +347,49 @@ class _KinBurnState extends State<KinBurn> {
                             width: 10,
                           ),
                           SizedBox(
-                            width: 80,
-                            child: Column(
-                              children: <Widget>[
-                                SizedBox(
-                                  height: 10,
+                            width: 85,
+                            height: 35,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: MaterialButton(
+                                onPressed: () => {
+                                  setState(() => {
+                                    _gender = _gender == GENDER_FEMALE ? GENDER_MALE : GENDER_FEMALE
+                                  })
+                                },
+                                padding: EdgeInsets.all(0),
+                                child: SizedBox(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(100),
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      color: Color(_gender == GENDER_FEMALE ? 0xffFFA7A7 : 0xffA7B1FF),
+                                      child: AnimatedContainer(
+                                          duration: Duration(seconds: 12),
+                                          curve: Curves.fastOutSlowIn,
+                                          child: Container(
+                                            margin: EdgeInsets.fromLTRB(_gender == GENDER_MALE ? 40 : 0, 0, _gender == GENDER_FEMALE ? 40 : 0, 0),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: SizedBox(
+                                                width: 28,
+                                                height: 28,
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Color(_gender == GENDER_FEMALE ? 0xffFFE8E8 : 0xffE8F4FF),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                CustomSwitch(
-                                  activeColor: _primaryColor,
-                                  value: false,
-                                  onChanged: (value) {
-                                    setState(() {
-//                                  status = value;
-                                    });
-                                  },
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -384,42 +411,19 @@ class _KinBurnState extends State<KinBurn> {
               ),
             ),
             SizedBox(
-              height: 20,
-            ),
-            FlatButton(
-              onPressed: () => {
-                setState(() => {
-                  _gender = _gender == GENDER_FEMALE ? GENDER_MALE : GENDER_FEMALE
-//                  _gender += 10
-                })
-              },
-              child: Text('$_gender'),
+              height: 40,
             ),
             SizedBox(
-              width: 80,
-              height: 35,
+              width: 250,
+              height: 42,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Container(
-                  alignment: Alignment.center,
-                  color: Color(0xff25aaff),
-                  child: Container(
-                    margin: EdgeInsets.fromLTRB(_gender == GENDER_FEMALE ? 40 : 0, 0, _gender == GENDER_MALE ? 40 : 0, 0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: SizedBox(
-                        width: 28,
-                        height: 28,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
+                borderRadius: BorderRadius.circular(300),
+                child: MaterialButton(
+                  padding: EdgeInsets.all(0),
+                  onPressed: () => {},
+                  color: _primaryColor,
+                  child: Text('BMI Calculate', style: TextStyle(fontSize: 18, color: Colors.white)),
+                ),
               ),
             )
           ],
